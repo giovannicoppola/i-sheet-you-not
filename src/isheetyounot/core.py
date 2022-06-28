@@ -114,7 +114,7 @@ def cache_key(o):
     p = os.path.abspath(o.docpath)
     v = '-'.join([
         '{}={}'.format(k, v) for
-        k, v in sorted(o.variables.items() + o.formats.items())
+        k, v in sorted(o.variables.items() | o.formats.items())
     ])
 
     tpl = ('{p}-{o.sheet}-{o.start_row}-{o.title_col}-'
@@ -142,7 +142,7 @@ def _cache_path(key):
     # log('cache_dir=%r', tilde(dp))
 
     try:
-        os.makedirs(dp, 0700)
+        os.makedirs(dp, 0o700)
     except OSError:
         pass
 
@@ -192,7 +192,7 @@ def cache_data(key, data):
     """
     p = _cache_path(key)
 
-    with open(p, 'wb') as fp:
+    with open(p, 'w') as fp:
         fp.write(data)
 
 

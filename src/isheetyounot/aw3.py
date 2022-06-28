@@ -265,7 +265,8 @@ def rescue(fn, help_url=None):
 
         # log('%r\n%s', sys.exc_info()[2], err)
         fb = Feedback()
-        fb.items = [make_item('Fatal error in workflow', unicode(err),
+        #fb.items = [make_item('Fatal error in workflow', unicode(err),
+        fb.items = [make_item('Fatal error in workflow', str(err),
                               icon=ICON_ERROR)]
         print(fb)
 

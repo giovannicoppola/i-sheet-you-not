@@ -124,9 +124,11 @@ def parse_args():
     evars = {}
     formats = {}
     for k in os.environ:
-        k = k.decode('utf-8')
+        #k = k.decode('utf-8')
+        k = str(k)
         if k.startswith('VAR_'):
-            v = os.environ[k].decode('utf-8')
+            v = str(os.environ[k])
+            #v = os.environ[k].decode('utf-8')
             if v and v.isdigit():
                 evars[k[4:]] = int(v)
             else:
@@ -134,7 +136,8 @@ def parse_args():
 
         elif k.startswith('FMT_'):
             key = k[4:]
-            v = os.environ[k].decode('utf-8')
+            v = str(os.environ[k])
+            #v = os.environ[k].decode('utf-8')
             if v and key.isdigit():
                 formats[int(key)] = v
             else:
