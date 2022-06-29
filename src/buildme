@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 #
 # Copyright (c) 2016 Dean Jackson <deanishe@deanishe.net>
@@ -15,7 +15,7 @@ from __future__ import print_function, absolute_import
 import argparse
 from contextlib import contextmanager
 import os
-from plistlib import readPlist, writePlist
+import plistlib
 from shutil import rmtree
 from subprocess import Popen, check_call, PIPE, STDOUT, CalledProcessError
 import sys
@@ -60,8 +60,11 @@ def tilde(p):
 
 def abspath(p):
     """Return absolute path."""
+            
     if p is None:
         return None
+      
+    
     return os.path.abspath(p)
 
 
@@ -88,7 +91,9 @@ class Builder(object):
         self.bundle_id = bundle_id
         self.name = name
         self.target = abspath(target)
-        self.docpath = abspath(docpath)
+        
+        #self.docpath = abspath(docpath)
+        self.docpath = docpath
         self.clean = clean
         self.debug = debug
         self.builddir = self._builddir()
@@ -106,10 +111,11 @@ class Builder(object):
                 self._zip()
             except Exception as err:
                 to_del.append(self.target)
+                
                 raise err
             finally:
                 tidyup(*to_del)
-
+                
         log('----------------------------')
         log('Name      : %s', self.name)
         log('Bundle ID : %s', self.bundle_id)
@@ -147,7 +153,11 @@ class Builder(object):
         """Update info plist."""
         log('Updating info.plist ...')
         with chdir(self.builddir):
-            info = readPlist('info.plist')
+            
+            with open("info.plist", "rb") as file:
+                info = plistlib.load(file)
+            #info = plistlib.load('info.plist')
+            
             info['bundleid'] = self.bundle_id
             log('bundleid=%r', self.bundle_id)
             info['name'] = self.name
@@ -196,7 +206,8 @@ class Builder(object):
                         log('stripped keyword "%s"', kw)
 
             log('Saving updated info.plist ...')
-            writePlist(info, 'info.plist')
+            fileName=open('info.plist','wb')
+            plistlib.dump(info, fileName)
 
     def _zip(self):
         """Create .alfredworkflow file."""
@@ -312,6 +323,7 @@ def parse_args():
         o.bundle_id = random_bundleid()
 
     o.docpath = os.getenv('DOC_PATH')
+    
     o.target = os.path.join(o.dir, filename(o.name))
     log('args=%r', o)
     if os.path.exists(o.target) and not o.force:

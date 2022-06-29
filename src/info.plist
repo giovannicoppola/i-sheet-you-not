@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>net.deanishe.alfred-i-sheet-you-not.d7709e4f79e74b658a66913cc4a335a7</string>
+	<string>net.deanishe.alfred-i-sheet-you-not</string>
 	<key>connections</key>
 	<dict>
 		<key>01FDAE7B-7189-488D-BF30-F05BDD1A8E1E</key>
@@ -343,8 +343,7 @@
 				<string>Searching your file…</string>
 				<key>script</key>
 				<string># Just run program
-export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
-python3 isyn.py
+./isyn
 </string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -451,6 +450,7 @@ log() {
 }
 
 # Change DOC_PATH
+
 test -z "${xlspath}" || { 
 	[[ "$xlspath" =~ ^"$HOME"(/|$) ]] &amp;&amp; xlspath="~${xlspath#$HOME}";
 	export DOC_PATH="${xlspath}";
@@ -544,8 +544,7 @@ log "Building workflow \"${title}\" in ${destdir} ..."
 				<key>script</key>
 				<string># Override the variable passed in by Alfred
 export SHEET=Websites
-export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
-python3 isyn.py --row 2 --title 3
+./isyn --row 2 --title 3
 
 
 
@@ -616,8 +615,7 @@ export VAR_empty=13
 # Use new-style formatting to add commas
 export FMT_5='Cost £ {:,.0f}'
 
-export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
-python3 isyn.py --sheet 'Liverpool Transfers' --row 4 --title 2 --subtitle 5 --value 12
+./isyn --sheet 'Liverpool Transfers' --row 4 --title 2 --subtitle 5 --value 12
 
 
 </string>
@@ -670,12 +668,7 @@ python3 isyn.py --sheet 'Liverpool Transfers' --row 4 --title 2 --subtitle 5 --v
 				<string>Searching your file…</string>
 				<key>script</key>
 				<string># Dataset has no third column (value)
-export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
-python3 isyn.py --sheet capitals --row 4 --title 2 --subtitle 3
-
-
-
-#./isyn --sheet capitals --row 4 --title 2 --subtitle 3
+./isyn --sheet capitals --row 4 --title 2 --subtitle 3
 </string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -817,9 +810,10 @@ export VAR_gdp=9
 export VAR_region=2
 export VAR_population=3
 export VAR_country=1
+export FMT_3="{:,.0f}"
 
-export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
-python3 isyn.py --sheet countries --row 6 --title 1 --subtitle 2
+
+./isyn --sheet countries --row 6 --title 1 --subtitle 3
 
 
 </string>
@@ -928,23 +922,6 @@ python3 isyn.py --sheet countries --row 6 --title 1 --subtitle 2
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>B44EC0D5-B000-41A7-8D7A-74608CD93D7C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -958,7 +935,7 @@ python3 isyn.py --sheet countries --row 6 --title 1 --subtitle 2
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>isyndemo quakes</string>
+				<string>isyndemo earthquakes</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -977,16 +954,16 @@ export VAR_rank=2
 export VAR_name=3
 export VAR_date=4
 # Format date (column 4)
-# export FMT_4="%d/%m/%Y"
+#export FMT_4="%d/%m/%Y"
 export VAR_location=5
 export VAR_magnitude=6
 # Format magnitude (2 decimal places)
-export FMT_6='%0.2f'
+export FMT_6="{:.2f}"
+
 export VAR_url=7
 export MATCH='%(name)s %(magnitude)s'
 
-export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
-python3 isyn.py --sheet earthquakes --row 4 --title 3 --subtitle 4 --value 7
+./isyn --sheet earthquakes --row 4 --title 2 --subtitle 6 --value 7
 
 
 </string>
@@ -1009,6 +986,23 @@ python3 isyn.py --sheet earthquakes --row 4 --title 3 --subtitle 4 --value 7
 			<string>0687C005-2E37-4D47-A891-D44E79694327</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>B44EC0D5-B000-41A7-8D7A-74608CD93D7C</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1080,7 +1074,7 @@ Formats can be sprintf-style formats or, if prefixed with "dt:", strftime-style 
 			<key>xpos</key>
 			<real>40</real>
 			<key>ypos</key>
-			<real>950</real>
+			<real>945</real>
 		</dict>
 		<key>29259774-1638-463E-AC06-9F8AAEA6B941</key>
 		<dict>

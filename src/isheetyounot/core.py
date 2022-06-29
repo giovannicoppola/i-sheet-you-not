@@ -40,8 +40,10 @@ from xlrd import (
 )
 from xlrd.xldate import xldate_as_datetime
 
+
+
 # Workflow version number
-version = '0.3.2'
+version = '0.4'
 
 # Fallback/default values
 BUNDLE_ID = 'net.deanishe.alfred-i-sheet-you-not'
@@ -112,11 +114,14 @@ def cache_key(o):
     """
     # Cache key of full path and *all* variables to ensure uniqueness
     p = os.path.abspath(o.docpath)
+
+    
     v = '-'.join([
         '{}={}'.format(k, v) for
-        k, v in sorted(o.variables.items() | o.formats.items())
+        k, v in sorted(o.variables.items())
     ])
-
+    #k, v in sorted(o.variables.items() | o.formats.items())
+    log (f'v string is: {v}')
     tpl = ('{p}-{o.sheet}-{o.start_row}-{o.title_col}-'
            '{o.subtitle_col}-{o.value_col}-{o.match}-{v}')
 
@@ -377,7 +382,10 @@ def read_data(path, sheet, cols, start_row=1, variables=None,
     log('Opened worksheet "%s" of %s', s.name, tilde(path))
 
     start_row -= 1
+    
     fmt = Formatter(wb.datemode, formats)
+    
+    
     # cols = [i - 1 for i in cols]
 
     items = []
