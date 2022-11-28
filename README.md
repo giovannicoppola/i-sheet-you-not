@@ -40,7 +40,7 @@ The workflow icon is from [IconArchive.com][icon].
 [alfred]: https://www.alfredapp.com/
 [doc]: http://www.deanishe.net/i-sheet-you-not/
 [demo]: doc/_static/demo.gif
-[gh-releases]: https://github.com/deanishe/i-sheet-you-not/releases
+[gh-releases]: https://github.com/giovannicoppola/i-sheet-you-not/releases
 [mit]: ./src/LICENCE.txt
 [icon]: http://www.iconarchive.com/show/google-jfk-icons-by-carlosjj/spreadsheets-icon.html
 [xlrd]: http://www.python-excel.org
