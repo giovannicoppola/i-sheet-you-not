@@ -3,12 +3,12 @@
 I Sheet You Not
 ===============
 
-Create auto-updating [Alfred 3][alfred] workflows from Excel worksheets.
+Create auto-updating [Alfred][alfred] workflows from Excel worksheets.
 
 
 ![I Sheet You Not demonstration][demo]
 
-I Sheet You Not is a workflow generator/template for [Alfred 3][alfred].
+I Sheet You Not is a workflow generator/template for [Alfred][alfred].
 It reads data from an Excel workbook and displays it in Alfred. You can specify
 which rows and columns the data are read from, and changes to the data are
 picked up automatically by the workflow.
