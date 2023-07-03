@@ -162,11 +162,14 @@ class Builder(object):
             log('bundleid=%r', self.bundle_id)
             info['name'] = self.name
             log('name=%r', self.name)
+            #log(f'Info: {info}')
+            
 
             newvars = {}
-            for k, v in info['variables'].items():
-                if k not in UNEXPORTED_VARS:
-                    newvars[k] = v
+            # for k, v in info['variables'].items():
+                
+            #     if k not in UNEXPORTED_VARS:
+            #         newvars[k] = v
             newvars['DOC_PATH'] = self.docpath or ''
             log('DOC_PATH=%r', newvars['DOC_PATH'])
             info['variables'] = newvars
@@ -336,7 +339,10 @@ def parse_args():
 def main():
     """Build workflow."""
     o = parse_args()
+    
+    # creates an instance of the Builder class with the args above
     b = Builder(o.bundle_id, o.name, o.target, o.docpath, o.clean, o.debug)
+    
     try:
         b.build()
     except Exception as err:

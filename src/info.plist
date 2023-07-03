@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>net.deanishe.alfred-i-sheet-you-not</string>
+	<string>net.deanishe.alfred-i-sheet-you-not.6e000a6551be46c682a0af7803c305e8</string>
 	<key>connections</key>
 	<dict>
 		<key>01FDAE7B-7189-488D-BF30-F05BDD1A8E1E</key>
@@ -695,6 +695,10 @@ export FMT_5='Cost £ {:,.0f}'
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -712,6 +716,10 @@ export FMT_5='Cost £ {:,.0f}'
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -963,7 +971,7 @@ export FMT_6="{:.2f}"
 export VAR_url=7
 export MATCH='%(name)s %(magnitude)s'
 
-./isyn --sheet earthquakes --row 4 --title 2 --subtitle 6 --value 7
+./isyn --sheet earthquakes --row 4 --title 7 --subtitle 6 --value 7
 
 
 </string>
@@ -992,6 +1000,10 @@ export MATCH='%(name)s %(magnitude)s'
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
@@ -1040,7 +1052,7 @@ Green elements are demos, showing how I Sheet You Not works.
 
 When you create a new workflow, you can adapt one of the demos to your requirements and delete the rest, or just delete the lot of them and start from scratch.
 
-See http://www.deanishe.net/i-sheet-you-not/#configuration for details of what the configuration values to the right mean.</string>
+See http://www.deanishe.net/i-sheet-you-not/#configuration for details of what the configuration values to the left mean.</string>
 	<key>uidata</key>
 	<dict>
 		<key>01FDAE7B-7189-488D-BF30-F05BDD1A8E1E</key>
@@ -1309,31 +1321,183 @@ It specifies no value, so you can't action results.</string>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
-	<key>variables</key>
-	<dict>
-		<key>DATE_FORMAT</key>
-		<string>%Y-%m-%d</string>
-		<key>DOC_PATH</key>
-		<string></string>
-		<key>MATCH</key>
-		<string></string>
-		<key>SHEET</key>
-		<string></string>
-		<key>START_ROW</key>
-		<string></string>
-		<key>SUBTITLE_COL</key>
-		<string></string>
-		<key>TITLE_COL</key>
-		<string></string>
-		<key>VALUE_COL</key>
-		<string></string>
-	</dict>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>%Y-%m-%d</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>DATE_FORMAT is a  format string that will be used for any columns that are formatted as dates in the Excel spreadsheet. You can override this format for specific columns. See Formatting values below.</string>
+			<key>label</key>
+			<string>Date format</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>DATE_FORMAT</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>filtermode</key>
+				<integer>2</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>Excel file to read data from</string>
+			<key>label</key>
+			<string>DOC_PATH</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>DOC_PATH</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>If specified, Alfred will filter your results against this field, not the item title.</string>
+			<key>label</key>
+			<string>Match</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>MATCH</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>By default, the workflow pulls data from the first row of the first worksheet in the workbook. The item title is pulled from column A, the subtitle from column B and the value from column C.
+
+To change these, use the SHEET, START_ROW, TITLE_COL, SUBTITLE_COL and VALUE_COL options in the workflow configuration sheet   SHEET may be the index number of the worksheet or the title. If SHEET is unset, it defaults to the first worksheet.</string>
+			<key>label</key>
+			<string>SHEET</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>SHEET</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>If START_ROW is unset, it defaults to the first row (i.e. 1).</string>
+			<key>label</key>
+			<string>START_ROW</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>START_ROW</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>If SUBTITLE_COL is unset, it defaults to the column after TITLE_COL.</string>
+			<key>label</key>
+			<string>SUBTITLE_COL</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>SUBTITLE_COL</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>If VALUE_COL is unset, it defaults to the second column after TITLE_COL.</string>
+			<key>label</key>
+			<string>VALUE_COL</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>VALUE_COL</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>If TITLE_COL is unset, it defaults to the first column (i.e. 1, which is column A).</string>
+			<key>label</key>
+			<string>TITLE_COL</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>TITLE_COL</string>
+		</dict>
+	</array>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>0.4</string>
+	<string>0.6</string>
 	<key>webaddress</key>
-	<string>http://www.deanishe.net/i-sheet-you-not/</string>
+	<string>https://github.com/giovannicoppola/i-sheet-you-not</string>
 </dict>
 </plist>

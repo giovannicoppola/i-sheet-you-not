@@ -9,7 +9,7 @@
 .DS_Store
 ._*
 Icon
-
+prefs.plist
 
 # Dropbox
 .dropbox.attr
